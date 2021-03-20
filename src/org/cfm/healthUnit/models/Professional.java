@@ -1,15 +1,15 @@
 package org.cfm.healthUnit.models;
 
 import org.cfm.healthUnit.enums.Category;
-import org.cfm.healthUnit.interfaces.Listable;
 import org.cfm.healthUnit.interfaces.Registrable;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
-public class Professional extends Person implements Registrable, Listable, Comparable {
+public class Professional extends Person implements Registrable {
 
-    private ArrayList<Professional> professionals = new ArrayList<>();
+    private List<Professional> professionals = new ArrayList<>();
     private Category category;
 
     public Professional() {
@@ -38,7 +38,7 @@ public class Professional extends Person implements Registrable, Listable, Compa
         this.category = category;
     }
 
-    public ArrayList<Professional> getProfessionals() {
+    public List<Professional> getProfessionals() {
         return professionals;
     }
 
@@ -82,22 +82,25 @@ public class Professional extends Person implements Registrable, Listable, Compa
         }
     }
 
-    @Override
-    public void recorrerLista() {
-        Collections.sort(professionals);
-        for (Professional professional : professionals) {
-            System.out.println(professional);
-        }
-    }
-
-    @Override
+/*    @Override
     public String toString() {
         return name + " " + category;
-    }
+    }*/
 
-    @Override
+/*    @Override
     public int compareTo(Object o) {
         Professional p = (Professional) o;
         return this.name.compareTo(p.name);
+    }*/
+
+    public void showProfessionals(){
+        if(professionals.size() == 0) {
+            System.out.println("No professionals registered");
+        } else {
+            professionals.sort(Comparator.comparing(Professional::getCategory));
+            for(Professional professional : professionals) {
+                System.out.println(professional.getCategory() + " " + professional.getName());
+            }
+        }
     }
 }

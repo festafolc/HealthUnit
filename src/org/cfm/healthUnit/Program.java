@@ -38,7 +38,7 @@ public class Program {
                     familyClass.disassociatePatientToFamily(patientClass.findPatient(inputSplit[1]));
                     break;
                 case "LP":
-                    //TODO
+                    professionalClass.showProfessionals();
                     break;
                 case "LU":
                     //TODO
@@ -76,7 +76,6 @@ public class Program {
                 default:
                     System.out.println("Invalid statement");
             }
-            professionalClass.recorrerLista();
         }
 
         sc.close();
