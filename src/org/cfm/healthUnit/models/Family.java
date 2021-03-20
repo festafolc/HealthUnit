@@ -58,6 +58,8 @@ public class Family {
         } else if (patientName == null) {
             System.out.println("Patient does not exist");
         } else {
+            System.out.println(patientName.getName());
+            System.out.println(familyName.getFamilyName());
             if((familyName.getFamilyName() != null) && (patientName.getName() != null)) {
                 Set<Patient> patients = familyMembers.keySet();
                 for (Patient patient : patients) {
@@ -70,6 +72,7 @@ public class Family {
             }
             if(!found) {
                 familyMembers.put(patientName, familyName);
+                patientName.setFamilyName(familyName.getFamilyName());
                 System.out.println("Patient associated to family");
             }
         }

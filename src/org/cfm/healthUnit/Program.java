@@ -41,7 +41,7 @@ public class Program {
                     professionalClass.showProfessionals();
                     break;
                 case "LU":
-                    //TODO
+                    patientClass.showPatients();
                     break;
                 case "LF":
                     //TODO
