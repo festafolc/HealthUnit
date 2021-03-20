@@ -47,7 +47,7 @@ public class Program {
                     familyClass.showFamilies();
                     break;
                 case "MF":
-                    //TODO
+                    familyClass.showPatientFamily(familyClass.findFamily(inputSplit[1]));
                     break;
                 case "MC":
                     //TODO
@@ -77,10 +77,6 @@ public class Program {
                     System.out.println("Invalid statement");
             }
         }
-
         sc.close();
-        System.out.println("fin");
-
-
     }
 }

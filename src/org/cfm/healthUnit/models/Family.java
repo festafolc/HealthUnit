@@ -97,4 +97,21 @@ public class Family {
             }
         }
     }
+
+    public void showPatientFamily(Family familyName) {
+        if(familyName == null) {
+            System.out.println("Family does not exist");
+        } else {
+            ArrayList<Patient> fullFamily = new ArrayList<>();
+            for (Map.Entry<Patient, Family> member : familyMembers.entrySet()) {
+                if (member.getValue().equals(familyName)) {
+                    fullFamily.add(member.getKey());
+                }
+            }
+            fullFamily.sort(Comparator.comparing(Patient::getAgeRange).thenComparing(Patient::getName));
+            for (Patient member : fullFamily) {
+                System.out.println(member.getAgeRange() + " " + member.getName());
+            }
+        }
+    }
 }
