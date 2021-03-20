@@ -44,7 +44,7 @@ public class Program {
                     patientClass.showPatients();
                     break;
                 case "LF":
-                    //TODO
+                    familyClass.showFamilies();
                     break;
                 case "MF":
                     //TODO

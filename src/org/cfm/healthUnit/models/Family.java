@@ -58,8 +58,6 @@ public class Family {
         } else if (patientName == null) {
             System.out.println("Patient does not exist");
         } else {
-            System.out.println(patientName.getName());
-            System.out.println(familyName.getFamilyName());
             if((familyName.getFamilyName() != null) && (patientName.getName() != null)) {
                 Set<Patient> patients = familyMembers.keySet();
                 for (Patient patient : patients) {
@@ -86,6 +84,17 @@ public class Family {
         } else {
             familyMembers.remove(patientName);
             System.out.println("Patient disassociated to family");
+        }
+    }
+
+    public void showFamilies() {
+        if(families.size() == 0) {
+            System.out.println("No families registered");
+        } else {
+            families.sort(Comparator.comparing(Family::getFamilyName));
+            for(Family family : families) {
+                System.out.println(family.getFamilyName());
+            }
         }
     }
 }
