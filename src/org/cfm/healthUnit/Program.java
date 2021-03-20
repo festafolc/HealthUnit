@@ -35,7 +35,7 @@ public class Program {
                     familyClass.associatePatientToFamily(patientClass.findPatient(inputSplit[1]), familyClass.findFamily(inputSplit[2]));
                     break;
                 case "DF":
-                    //TODO
+                    familyClass.disassociatePatientToFamily(patientClass.findPatient(inputSplit[1]));
                     break;
                 case "LP":
                     //TODO

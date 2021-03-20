@@ -5,7 +5,7 @@ import java.util.*;
 public class Family {
 
     private final ArrayList<Family> families = new ArrayList<>();
-    private Map<Patient, Family> familyMembers = new HashMap<>();
+    private final Map<Patient, Family> familyMembers = new HashMap<>();
     private String familyName;
 
     public Family() {
@@ -52,9 +52,7 @@ public class Family {
     }
 
     public void associatePatientToFamily(Patient patientName, Family familyName) {
-
         boolean found = false;
-
         if(familyName == null) {
             System.out.println("Family does not exist");
         } else if (patientName == null) {
@@ -74,6 +72,17 @@ public class Family {
                 familyMembers.put(patientName, familyName);
                 System.out.println("Patient associated to family");
             }
+        }
+    }
+
+    public void disassociatePatientToFamily(Patient patientName) {
+        if(patientName == null) {
+            System.out.println("Patient does not exist");
+        } else if (familyMembers.get(patientName) == null) {
+            System.out.println("Patient does not belong to family");
+        } else {
+            familyMembers.remove(patientName);
+            System.out.println("Patient disassociated to family");
         }
     }
 }
