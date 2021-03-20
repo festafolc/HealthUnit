@@ -32,7 +32,7 @@ public class Program {
                     familyClass.register(inputSplit[1]);
                     break;
                 case "AF":
-                    //TODO
+                    familyClass.associatePatientToFamily(patientClass.findPatient(inputSplit[1]), familyClass.findFamily(inputSplit[2]));
                     break;
                 case "DF":
                     //TODO

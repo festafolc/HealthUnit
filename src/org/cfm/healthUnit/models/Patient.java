@@ -38,7 +38,7 @@ public class Patient extends Person implements Registrable {
 
 
     @Override
-    public void register(String name, String ageRange) { // Solucionar la condición de si él nombre existe no se puede añadir
+    public void register(String name, String ageRange) {
         boolean found = false;
         if (!ageRange.equalsIgnoreCase("YOUNG") && !ageRange.equalsIgnoreCase("ADULT") && !ageRange.equalsIgnoreCase("OLD")) {
             System.out.println("Age range does not exist");
@@ -56,5 +56,13 @@ public class Patient extends Person implements Registrable {
                 System.out.println("Patient registered with success");
             }
         }
+    }
+
+    public Patient findPatient(String name) {
+        for(Patient p : patients) {
+            if (p.getName().equals(name));
+            return p;
+        }
+        return null;
     }
 }

@@ -1,12 +1,11 @@
 package org.cfm.healthUnit.models;
 
-import org.cfm.healthUnit.interfaces.Registrable;
-
-import java.util.ArrayList;
+import java.util.*;
 
 public class Family {
 
-    private ArrayList<Family> families = new ArrayList<>();
+    private final ArrayList<Family> families = new ArrayList<>();
+    private Map<Patient, Family> familyMembers = new HashMap<>();
     private String familyName;
 
     public Family() {
@@ -36,9 +35,44 @@ public class Family {
                 } else {
                     Family family = new Family(familyName);
                     families.add(family);
-                    System.out.println("Family registered with success2");
+                    System.out.println("Family registered with success");
                 }
                 break;
+            }
+        }
+    }
+
+    public Family findFamily(String familyName) {
+        for(Family f : families) {
+            if(f.getFamilyName().equals(familyName)) {
+                return f;
+            }
+        }
+        return null;
+    }
+
+    public void associatePatientToFamily(Patient patientName, Family familyName) {
+
+        boolean found = false;
+
+        if(familyName == null) {
+            System.out.println("Family does not exist");
+        } else if (patientName == null) {
+            System.out.println("Patient does not exist");
+        } else {
+            if((familyName.getFamilyName() != null) && (patientName.getName() != null)) {
+                Set<Patient> patients = familyMembers.keySet();
+                for (Patient patient : patients) {
+                    if (patient.getName().equals(patientName.getName())){
+                        found = true;
+                        System.out.println("Patient is already associated");
+                        break;
+                    }
+                }
+            }
+            if(!found) {
+                familyMembers.put(patientName, familyName);
+                System.out.println("Patient associated to family");
             }
         }
     }
