@@ -1,5 +1,6 @@
 package org.cfm.healthUnit;
 
+import org.cfm.healthUnit.models.Appointment;
 import org.cfm.healthUnit.models.Family;
 import org.cfm.healthUnit.models.Patient;
 import org.cfm.healthUnit.models.Professional;
@@ -12,6 +13,7 @@ public class Program {
         Professional professionalClass = new Professional();
         Patient patientClass = new Patient();
         Family familyClass = new Family();
+        Appointment appointmentClass = new Appointment();
 
         Scanner sc = new Scanner(System.in);
 
@@ -50,7 +52,7 @@ public class Program {
                     familyClass.showPatientFamily(familyClass.findFamily(inputSplit[1]));
                     break;
                 case "MC":
-                    //TODO
+                    appointmentClass.newAppointment(patientClass.findPatient(inputSplit[1]), professionalClass);
                     break;
                 case "CC":
                     //TODO
