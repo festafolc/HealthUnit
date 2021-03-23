@@ -1,5 +1,6 @@
 package org.cfm.healthUnit;
 
+import org.cfm.healthUnit.enums.Category;
 import org.cfm.healthUnit.enums.Service;
 import org.cfm.healthUnit.models.Appointment;
 import org.cfm.healthUnit.models.Family;
@@ -65,7 +66,8 @@ public class Program {
                     appointmentClass.showFamilyAppointments(familyClass.findFamily(inputSplit[1]));
                     break;
                 case "LSP":
-                    //TODO
+                    appointmentClass.showProfessionalAppointments(professionalClass.checkProfessional(Category.valueOf(inputSplit[1].toUpperCase()), inputSplit[2]));
+                    //appointmentClass.showProfessionalAppointments(Category.valueOf(inputSplit[1].toUpperCase()), professionalClass.findProfessional(inputSplit[2]));
                     break;
                 case "LMS":
                     //TODO

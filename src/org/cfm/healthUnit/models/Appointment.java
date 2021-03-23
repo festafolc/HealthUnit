@@ -187,4 +187,25 @@ public class Appointment {
             System.out.println("Family does not exist");
         }
     }
+
+    public void showProfessionalAppointments(Professional professional) {
+        if (professional != null) {
+            List<Appointment> professionalAppointments = new ArrayList<>();
+            for (Appointment appointment : appointments) {
+                if((appointment.getProfessional().getCategory().equals(professional.getCategory())) && appointment.getProfessional().getName().equals(professional.getName())) {
+                    professionalAppointments.add(appointment);
+                }
+            }
+            if (professionalAppointments.size() > 0) {
+                professionalAppointments.sort(Comparator.comparing(Appointment::getService));
+                for (Appointment appointment : professionalAppointments) {
+                    System.out.println(appointment.getService() + " " + appointment.getPatient().getName());
+                }
+            } else {
+                System.out.println("Professional has not appointments");
+            }
+        } else {
+            System.out.println("Professional does not exist");
+        }
+    }
 }

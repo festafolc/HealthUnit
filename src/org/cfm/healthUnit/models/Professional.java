@@ -46,6 +46,15 @@ public class Professional extends Person implements Registrable {
         this.professionals = professionals;
     }
 
+    public Professional findProfessional(String name) {
+        for(Professional professional : professionals) {
+            if (professional.getName().equals(name)) {
+                return professional;
+            }
+        }
+        return null;
+    }
+
     public Professional checkProfessional(Category category, String name) {
         for (Professional professional : professionals) {
             if(professional.getCategory() == category && professional.getName().equals(name)) {
@@ -81,17 +90,6 @@ public class Professional extends Person implements Registrable {
             e.printStackTrace();
         }
     }
-
-/*    @Override
-    public String toString() {
-        return name + " " + category;
-    }*/
-
-/*    @Override
-    public int compareTo(Object o) {
-        Professional p = (Professional) o;
-        return this.name.compareTo(p.name);
-    }*/
 
     public void showProfessionals(){
         if(professionals.size() == 0) {
