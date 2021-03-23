@@ -1,5 +1,6 @@
 package org.cfm.healthUnit;
 
+import org.cfm.healthUnit.enums.Service;
 import org.cfm.healthUnit.models.Appointment;
 import org.cfm.healthUnit.models.Family;
 import org.cfm.healthUnit.models.Patient;
@@ -55,9 +56,10 @@ public class Program {
                     appointmentClass.newAppointment(patientClass.findPatient(inputSplit[1]), professionalClass);
                     break;
                 case "CC":
+                    appointmentClass.cancelAppointment(patientClass.findPatient(inputSplit[1]));
                     break;
                 case "LCU":
-                    //TODO
+                    appointmentClass.showPatientAppointments(patientClass.findPatient(inputSplit[1]));
                     break;
                 case "LCF":
                     //TODO

@@ -46,13 +46,13 @@ public class Professional extends Person implements Registrable {
         this.professionals = professionals;
     }
 
-    public boolean checkProfessional(Category category, String name) {
+    public Professional checkProfessional(Category category, String name) {
         for (Professional professional : professionals) {
             if(professional.getCategory() == category && professional.getName().equals(name)) {
-                return true;
+                return professional;
             }
         }
-        return false;
+        return null;
     }
 
     @Override

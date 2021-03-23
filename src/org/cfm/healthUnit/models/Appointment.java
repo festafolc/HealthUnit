@@ -4,6 +4,7 @@ import org.cfm.healthUnit.enums.Category;
 import org.cfm.healthUnit.enums.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -39,8 +40,8 @@ public class Appointment {
         return appointments;
     }
 
-    public void newAppointment(Patient name, Professional professionalClass) {
-        if (name != null) {
+    public void newAppointment(Patient patient, Professional professionalClass) {
+        if (patient != null) {
             Scanner sc = new Scanner(System.in);
             String[] professionalInput;
             while (true) {
@@ -53,8 +54,9 @@ public class Appointment {
                         String input2 = sc.nextLine();
                         professionalInput = input2.split(" ");
                         if (professionalInput[0].equalsIgnoreCase("MEDICINE")) {
-                            if (professionalClass.checkProfessional(Category.valueOf(professionalInput[0].toUpperCase()), professionalInput[1])) {
-                                appointments.add(new Appointment(name, professional, Service.valueOf(input.toUpperCase())));
+                            Professional professional = professionalClass.checkProfessional(Category.valueOf(professionalInput[0].toUpperCase()), professionalInput[1]);
+                            if (professional != null) {
+                                appointments.add(new Appointment(patient, professional, Service.valueOf(input.toUpperCase())));
                                 System.out.println("Appointment created");
                             } else {
                                 System.out.println("Professional does not exist");
@@ -67,11 +69,12 @@ public class Appointment {
                         input2 = sc.nextLine();
                         professionalInput = input2.split(" ");
                         if (professionalInput[0].equalsIgnoreCase("MEDICINE") || professionalInput[0].equalsIgnoreCase("NURSING") || professionalInput[0].equalsIgnoreCase("AUXILIARY")) {
-                            if (professionalClass.checkProfessional(Category.valueOf(professionalInput[0].toUpperCase()), professionalInput[1])) {
-                                if (checkSequenceService(name) == null) {
+                            Professional professional = professionalClass.checkProfessional(Category.valueOf(professionalInput[0].toUpperCase()), professionalInput[1]);
+                            if (professional != null) {
+                                if (checkSequenceService(patient) == null) {
                                     System.out.println("Invalid sequence");
-                                } else if (checkSequenceService(name).equals(Service.CONSULTATION)) {
-                                    appointments.add(new Appointment(name, professional, Service.valueOf(input.toUpperCase())));
+                                } else if (checkSequenceService(patient).equals(Service.CONSULTATION)) {
+                                    appointments.add(new Appointment(patient, professional, Service.valueOf(input.toUpperCase())));
                                     System.out.println("Appointment created");
                                 } else {
                                     System.out.println("Invalid sequence");
@@ -87,12 +90,13 @@ public class Appointment {
                         input2 = sc.nextLine();
                         professionalInput = input2.split(" ");
                         if (professionalInput[0].equalsIgnoreCase("NURSING") || professionalInput[0].equalsIgnoreCase("AUXILIARY")) {
-                            if (professionalClass.checkProfessional(Category.valueOf(professionalInput[0].toUpperCase()), professionalInput[1])) {//   ( (professional.getCategory().equals(Category.NURSING) && professional.getName().equals(professionalInput[1])) || (professional.getCategory().equals(Category.AUXILIARY) && professional.getName().equals(professionalInput[1]))) {
-                                if ((checkSequenceService(name) == null)) {
-                                    appointments.add(new Appointment(name, professional, Service.valueOf(input.toUpperCase())));
+                            Professional professional = professionalClass.checkProfessional(Category.valueOf(professionalInput[0].toUpperCase()), professionalInput[1]);
+                            if (professional != null) {
+                                if ((checkSequenceService(patient) == null)) {
+                                    appointments.add(new Appointment(patient, professional, Service.valueOf(input.toUpperCase())));
                                     System.out.println("Appointment created");
-                                } else if ((!checkSequenceService(name).equals(Service.SURGERY))) {
-                                    appointments.add(new Appointment(name, professional, Service.valueOf(input.toUpperCase())));
+                                } else if ((!checkSequenceService(patient).equals(Service.SURGERY))) {
+                                    appointments.add(new Appointment(patient, professional, Service.valueOf(input.toUpperCase())));
                                     System.out.println("Appointment created");
                                 } else {
                                     System.out.println("Invalid sequence");
@@ -125,6 +129,41 @@ public class Appointment {
         } else {
             Appointment lastAppointment = sequencePatient.get(sequencePatient.size() - 1);
             return lastAppointment.getService();
+        }
+    }
+
+
+    public void cancelAppointment(Patient patient) {
+        if(patient != null) {
+            if(checkSequenceService(patient) != null) {
+                appointments.removeIf(appointment -> appointment.getPatient().equals(patient));
+                System.out.println("Appointments cancelled successfully");
+            } else {
+                System.out.println("No appointments for the patient");
+            }
+        } else {
+            System.out.println("Patient does not exist");
+        }
+    }
+
+    public void showPatientAppointments(Patient patient) {
+        if(patient != null) {
+            if(checkSequenceService(patient) != null) {
+                List<Appointment> sequencePatient = new ArrayList<>();
+                for (Appointment appointment : appointments) {
+                    if (appointment.getPatient().equals(patient)) {
+                        sequencePatient.add(appointment);
+                    }
+                }
+                sequencePatient.sort(Comparator.comparing(Appointment::getService));
+                for(Appointment sequence : sequencePatient) {
+                    System.out.println(sequence.getService() + " " + sequence.getProfessional().getCategory() + " " + sequence.getProfessional().getName());
+                }
+            } else {
+                System.out.println("No appointments for the patient");
+            }
+        } else {
+            System.out.println("Patient does not exist");
         }
     }
 }
