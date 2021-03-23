@@ -67,10 +67,9 @@ public class Program {
                     break;
                 case "LSP":
                     appointmentClass.showProfessionalAppointments(professionalClass.checkProfessional(Category.valueOf(inputSplit[1].toUpperCase()), inputSplit[2]));
-                    //appointmentClass.showProfessionalAppointments(Category.valueOf(inputSplit[1].toUpperCase()), professionalClass.findProfessional(inputSplit[2]));
                     break;
                 case "LMS":
-                    //TODO
+                    appointmentClass.showServiceAppointments(inputSplit[1]);
                     break;
                 case "G":
                     //TODO

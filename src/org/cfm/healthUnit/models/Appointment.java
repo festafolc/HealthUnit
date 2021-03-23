@@ -208,4 +208,27 @@ public class Appointment {
             System.out.println("Professional does not exist");
         }
     }
+
+    public void showServiceAppointments(String service) {
+        if(service.equalsIgnoreCase("CONSULTATION") ||
+                service.equalsIgnoreCase("SURGERY") ||
+                service.equalsIgnoreCase("NURSING")) {
+            List<Appointment> serviceAppointments = new ArrayList<>();
+            for (Appointment appointment : appointments) {
+                if (appointment.getService().name().equalsIgnoreCase(service)) {
+                    serviceAppointments.add(appointment);
+                }
+            }
+            if(serviceAppointments.size() > 0) {
+                serviceAppointments.sort(Comparator.comparing(Appointment::getService));
+                for (Appointment appointment : serviceAppointments) {
+                    System.out.println(appointment.getProfessional().getCategory() + " " + appointment.getProfessional().getName() + " " + appointment.getPatient().getName());
+                }
+            } else {
+                System.out.println("Service without appointments");
+            }
+        } else {
+            System.out.println("Service does not exist");
+        }
+    }
 }
