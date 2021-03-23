@@ -62,7 +62,7 @@ public class Program {
                     appointmentClass.showPatientAppointments(patientClass.findPatient(inputSplit[1]));
                     break;
                 case "LCF":
-                    //TODO
+                    appointmentClass.showFamilyAppointments(familyClass.findFamily(inputSplit[1]));
                     break;
                 case "LSP":
                     //TODO

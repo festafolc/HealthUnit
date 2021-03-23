@@ -166,4 +166,25 @@ public class Appointment {
             System.out.println("Patient does not exist");
         }
     }
+
+    public void showFamilyAppointments(Family family) {
+        if(family != null) {
+            List<Appointment> familyAppointments = new ArrayList<>();
+            for (Appointment appointment : appointments) {
+                if(appointment.getPatient().getFamilyName().equals(family.getFamilyName())) {
+                    familyAppointments.add(appointment);
+                }
+            }
+            if (familyAppointments.size() > 0) {
+                familyAppointments.sort(Comparator.comparing(Appointment::getService));
+                for(Appointment appointment : familyAppointments) {
+                    System.out.println(appointment.getPatient().getName() + " " + appointment.getService() + " " + appointment.getProfessional().getCategory() + " " + appointment.getProfessional().getName());
+                }
+            } else {
+                System.out.println("Family without appointments");
+            }
+        } else {
+            System.out.println("Family does not exist");
+        }
+    }
 }
