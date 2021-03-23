@@ -48,7 +48,7 @@ public class Professional extends Person implements Registrable {
 
     public boolean checkProfessional(Category category, String name) {
         for (Professional professional : professionals) {
-            if(professional.getCategory() == category && professional.getName() == name) {
+            if(professional.getCategory() == category && professional.getName().equals(name)) {
                 return true;
             }
         }

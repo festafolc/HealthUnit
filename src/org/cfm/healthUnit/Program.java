@@ -55,7 +55,6 @@ public class Program {
                     appointmentClass.newAppointment(patientClass.findPatient(inputSplit[1]), professionalClass);
                     break;
                 case "CC":
-                    //TODO
                     break;
                 case "LCU":
                     //TODO
