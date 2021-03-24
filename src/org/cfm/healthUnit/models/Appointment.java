@@ -3,12 +3,13 @@ package org.cfm.healthUnit.models;
 import org.cfm.healthUnit.enums.Category;
 import org.cfm.healthUnit.enums.Service;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
-public class Appointment {
+public class Appointment implements Serializable {
 
     private Patient patient;
     private Professional professional;

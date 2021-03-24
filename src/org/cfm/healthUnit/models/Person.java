@@ -1,6 +1,8 @@
 package org.cfm.healthUnit.models;
 
-public abstract class Person {
+import java.io.Serializable;
+
+public abstract class Person implements Serializable {
 
     protected String name;
 

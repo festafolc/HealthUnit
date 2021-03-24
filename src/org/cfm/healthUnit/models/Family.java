@@ -1,8 +1,9 @@
 package org.cfm.healthUnit.models;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Family {
+public class Family implements Serializable {
 
     private final ArrayList<Family> families = new ArrayList<>();
     private final Map<Patient, Family> familyMembers = new HashMap<>();

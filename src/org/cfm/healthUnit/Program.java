@@ -1,12 +1,12 @@
 package org.cfm.healthUnit;
 
 import org.cfm.healthUnit.enums.Category;
-import org.cfm.healthUnit.enums.Service;
 import org.cfm.healthUnit.models.Appointment;
 import org.cfm.healthUnit.models.Family;
 import org.cfm.healthUnit.models.Patient;
 import org.cfm.healthUnit.models.Professional;
 
+import java.io.*;
 import java.util.Scanner;
 
 public class Program {
@@ -72,10 +72,34 @@ public class Program {
                     appointmentClass.showServiceAppointments(inputSplit[1]);
                     break;
                 case "G":
-                    //TODO
+                    try {
+                        FileOutputStream file = new FileOutputStream("healthUnit.ser");
+                        ObjectOutputStream out = new ObjectOutputStream(file);
+                        out.writeObject(professionalClass);
+                        out.writeObject(patientClass);
+                        out.writeObject(familyClass);
+                        out.writeObject(appointmentClass);
+                        out.close();
+                        file.close();
+                        System.out.println("Health Unit saved");
+                    } catch (IOException e) {
+                        System.out.println("Something wrong happened");
+                    }
                     break;
                 case "L":
-                    //TODO
+                    try {
+                        FileInputStream file = new FileInputStream("healthUnit.ser");
+                        ObjectInputStream in = new ObjectInputStream(file);
+                        professionalClass = (Professional) in.readObject();
+                        patientClass = (Patient) in.readObject();
+                        familyClass = (Family) in.readObject();
+                        appointmentClass = (Appointment) in.readObject();
+                        in.close();
+                        file.close();
+                        System.out.println("Health Unit loaded");
+                    } catch (IOException | ClassNotFoundException e) {
+                        System.out.println("Something went wrong");
+                    }
                     break;
                 default:
                     System.out.println("Invalid statement");

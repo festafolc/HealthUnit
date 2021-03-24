@@ -3,10 +3,11 @@ package org.cfm.healthUnit.models;
 import org.cfm.healthUnit.enums.AgeRange;
 import org.cfm.healthUnit.interfaces.Registrable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class Patient extends Person implements Registrable {
+public class Patient extends Person implements Registrable, Serializable {
 
     private AgeRange ageRange;
     private String familyName;

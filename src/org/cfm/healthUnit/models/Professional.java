@@ -3,11 +3,12 @@ package org.cfm.healthUnit.models;
 import org.cfm.healthUnit.enums.Category;
 import org.cfm.healthUnit.interfaces.Registrable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class Professional extends Person implements Registrable {
+public class Professional extends Person implements Registrable, Serializable {
 
     private List<Professional> professionals = new ArrayList<>();
     private Category category;
